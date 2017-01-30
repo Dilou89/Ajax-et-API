@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
-
+var path= require('path');
+app.use(express.static(path.join(__dirname,'/')));
 // var places = require('./data');
 
 app.use(function(req, res, next) {
@@ -9,10 +10,15 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.get('/', function (request, response) {
+app.get('/', function (req, res) {
 	console.log("/");
 	
-	response.send('Rien par ici, désolé');
+	res.sendFile(path.join(__dirname, '/', 'index.html'));
+});
+app.get('/meteo', function (req, res) {
+
+	
+	res.sendFile(path.join(__dirname, '/', 'meteo.html'));
 });
 
 // app.get('/place', function(request, response){
